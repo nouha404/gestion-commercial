@@ -1,8 +1,6 @@
 package com.ism.ismecom.data.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,10 @@ public class Article extends AbstractEntity{
     private Boolean promo;
     private Double qteStock;
     private String photo;
-    @OneToMany(mappedBy = "article")
+
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<LigneCommande> ligneCommande;
+
+    @ManyToOne
+    Categorie categorie;
 }

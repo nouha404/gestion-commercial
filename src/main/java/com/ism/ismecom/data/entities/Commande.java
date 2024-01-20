@@ -27,6 +27,10 @@ public class Commande extends AbstractEntity{
     private EtatCommande etat;
     @Embedded
     private Adresse adresse;
-    @OneToMany(mappedBy = "commande")
+
+    @ManyToOne
+    Client client;
+
+    @OneToMany(mappedBy = "commande",cascade = CascadeType.ALL)
     private List<LigneCommande> ligneCommandes;
 }
