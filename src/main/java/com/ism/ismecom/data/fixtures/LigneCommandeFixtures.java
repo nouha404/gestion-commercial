@@ -8,11 +8,12 @@ import com.ism.ismecom.data.repositories.CommandeRepository;
 import com.ism.ismecom.data.repositories.LigneCommandeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
-//@DependsOn({"ArticleFixtures", "CommandeFixtures"})
+@Order(Ordered.LOWEST_PRECEDENCE - 5)
 @RequiredArgsConstructor
 //@Component
 public class LigneCommandeFixtures implements CommandLineRunner {

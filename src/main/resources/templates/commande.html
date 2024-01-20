@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Liste des Commandes</h3>
+<table class="table table-bordered">
+    <thead>
+    <th>ID Commande</th>
+    <th>Date de Commande</th>
+    <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
+    </thead>
+    <tbody>
+    <!-- Utilisez une boucle Thymeleaf pour itérer sur la liste des commandes -->
+    <tr th:each="commande : ${commandes}">
+        <td th:text="${commande.id}"></td>
+        <td th:text="${commande.dateCommande}"></td>
+        <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

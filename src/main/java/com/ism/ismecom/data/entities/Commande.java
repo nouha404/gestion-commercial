@@ -27,7 +27,6 @@ public class Commande extends AbstractEntity{
     private EtatCommande etat;
     @Embedded
     private Adresse adresse;
-
     @ManyToOne
     Client client;
 

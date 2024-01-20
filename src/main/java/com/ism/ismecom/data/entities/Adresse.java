@@ -1,10 +1,7 @@
 package com.ism.ismecom.data.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Embeddable
@@ -12,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Data
 @Table(name = "ligne_commandes")
 public class Adresse{
 
@@ -20,5 +18,14 @@ public class Adresse{
     private String numVilla;
     @ManyToOne
     Article article;
+
+    @Override
+    public String toString() {
+        return
+                ville + " | " +
+                        quartier + " | "+
+        numVilla
+        ;
+    }
 
 }

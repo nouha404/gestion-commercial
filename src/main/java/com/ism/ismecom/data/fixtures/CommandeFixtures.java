@@ -6,12 +6,15 @@ import com.ism.ismecom.data.enums.EtatCommande;
 import com.ism.ismecom.data.repositories.CommandeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+@Order(Ordered.LOWEST_PRECEDENCE - 4)
 @RequiredArgsConstructor
 //@Component
 public class CommandeFixtures implements CommandLineRunner {
