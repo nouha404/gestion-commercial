@@ -1,32 +1,57 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Detail commande</title>
+    <!-- Utilisation des liens CDN pour Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
 </head>
 <body>
-<h3>Liste des Commandes</h3>
-<table class="table table-bordered">
-    <thead>
-    <th>ID Commande</th>
-    <th>Date de Commande</th>
-    <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
-    </thead>
-    <tbody>
 
-    <h3 th:if="${client}" th:text="${client.nomComplet}"></h3>
+<div class="container mt-2">
+        <!--nav-->
+        <div th:replace="nav :: nav"></div>
+        <a
+            class="btn btn-dark mb-3"
+            th:href="@{liste-client(page=0)}"
+            >Retour
 
-    <!-- Utilisez une boucle Thymeleaf pour itérer sur la liste des commandes -->
-    <tr th:each="commande : ${commandes}">
-        <td th:text="${commande.id}"></td>
-        <td th:text="${commande.dateCommand}"></td>
-        <td th:text="${commande.montant}"></td>
-        <td th:text="${commande.adresse}"></td>
-        <td th:text="${commande.etat}"></td>
-        <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
-    </tr>
-    </tbody>
-</table>
+        </a>
+
+        <h4
+            class="mb-4"
+            th:if="${client}"  th:text="'Liste des Commandes de : ' + ${client.nomComplet}"
+        ></h4>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">ID Commande</th>
+            <th scope="col">Date de Commande</th>
+            <th scope="col">Montant Commande</th>
+            <th scope="col">Adresse Commande</th>
+            <th scope="col">Etat Commande</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="commande : ${commandes}">
+            <td th:text="${commande.id}"></td>
+            <td th:text="${commande.dateCommand}"></td>
+            <td th:text="${commande.montant}"></td>
+            <td th:text="${commande.adresse}"></td>
+            <td th:text="${commande.etat}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

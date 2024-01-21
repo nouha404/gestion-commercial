@@ -24,7 +24,7 @@ public class ClientControllerImpl implements ClientController {
     public String listerClient(
             Model model,
             @RequestParam(defaultValue = "0",name = "page") int page,
-            @RequestParam(defaultValue = "8",name = "size") int size
+            @RequestParam(defaultValue = "5",name = "size") int size
     ) {
 
         Page<Client> clients =  clientRepository.findAllByActiveTrue(PageRequest.of(page,size));
@@ -48,7 +48,12 @@ public class ClientControllerImpl implements ClientController {
         model.addAttribute("commandes",commandes);
 
         List<Client> client = clientRepository.findClientById(id);
-        model.addAttribute("client",client);
+
+        //un seul client donc
+        if (!client.isEmpty()) {
+            model.addAttribute("client", client.get(0));
+        }
+
 
         return "commande";
     }

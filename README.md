@@ -15,3 +15,9 @@
 
 #### Ligne de commande
 <img src="./images/ligneCommande.png" alt="ligne Commande"/>
+
+#### Liste des clients
+<img src="./images/template-client.png" alt="Liste des clients"/>
+
+#### Commande d'un client
+<img src="./images/template-commande.png" alt="Commande d'un client"/>
