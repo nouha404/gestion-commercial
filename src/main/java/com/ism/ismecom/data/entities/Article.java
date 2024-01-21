@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "articles")
 public class Article extends AbstractEntity{
     @Column(unique = true,nullable = false,length = 50)
     private String libelle;

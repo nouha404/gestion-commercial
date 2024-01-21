@@ -10,14 +10,12 @@ import lombok.*;
 @Getter
 @Setter
 @Data
-@Table(name = "ligne_commandes")
+@Table(name = "adresses")
 public class Adresse{
 
     private String quartier;
     private String ville;
     private String numVilla;
-    @ManyToOne
-    Article article;
 
     @Override
     public String toString() {

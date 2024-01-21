@@ -17,7 +17,7 @@ public class CategorieFixtures implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 1; i < 20; i++) {
+        for (long i = 1L; i < 21L; i++) {
             Categorie categorie = new Categorie();
             categorie.setLibelle("Categ "+i);
             categorie.setActive(i%2==0);

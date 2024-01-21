@@ -42,8 +42,15 @@ public class ClientControllerImpl implements ClientController {
     }
 
     @Override
-    public String listeCommande(Model model) {
-        return null;
+    public String listeCommande(Model model, long id) {
+        List<Commande> commandes = commandeRepository.findCommandeById(id);
+        //Page<Commande> commandes = commandeRepository.findCommandeByClientId(id,PageRequest.of(0, 10));
+        model.addAttribute("commandes",commandes);
+
+        List<Client> client = clientRepository.findClientById(id);
+        model.addAttribute("client",client);
+
+        return "commande";
     }
 
 

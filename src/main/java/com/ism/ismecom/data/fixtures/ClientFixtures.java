@@ -18,7 +18,7 @@ public class ClientFixtures implements CommandLineRunner {
     private final ClientRepository clientRepository;
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 1; i < 20; i++) {
+        for (long i = 1L; i < 21L; i++) {
             Client client = new Client();
             client.setActive(i%2==0);
             client.setNomComplet("Client "+i);

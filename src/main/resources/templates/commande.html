@@ -13,10 +13,16 @@
     <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
     </thead>
     <tbody>
+
+    <h3 th:if="${client}" th:text="${client.nomComplet}"></h3>
+
     <!-- Utilisez une boucle Thymeleaf pour itérer sur la liste des commandes -->
     <tr th:each="commande : ${commandes}">
         <td th:text="${commande.id}"></td>
-        <td th:text="${commande.dateCommande}"></td>
+        <td th:text="${commande.dateCommand}"></td>
+        <td th:text="${commande.montant}"></td>
+        <td th:text="${commande.adresse}"></td>
+        <td th:text="${commande.etat}"></td>
         <!-- Ajoutez d'autres colonnes en fonction de votre modèle de données -->
     </tr>
     </tbody>

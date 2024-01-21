@@ -23,7 +23,7 @@ public class LigneCommandeFixtures implements CommandLineRunner {
     private final CommandeRepository commandeRepository;
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 1; i < 20; i++) {
+        for (long i = 1L; i < 21L; i++) {
             LigneCommande ligneCommande = new LigneCommande();
             ligneCommande.setActive(i%2==0);
             ligneCommande.setPrix(5+i+000.0+i);
@@ -32,11 +32,11 @@ public class LigneCommandeFixtures implements CommandLineRunner {
             ligneCommande.setMontant(ligneCommande.getPrix()*ligneCommande.getQuantite());
 
             //Recherche de l'article
-            Article article = articleRepository.findById((long) i).orElse(null);
+            Article article = articleRepository.findById(i).orElse(null);
             ligneCommande.setArticle(article);
 
-            //Recherche dela commande
-            Commande commande = commandeRepository.findById((long) i).orElse(null);
+            //Recherche de la commande
+            Commande commande = commandeRepository.findById(i).orElse(null);
             ligneCommande.setCommande(commande);
             //insert
             ligneCommandeRepository.save(ligneCommande);

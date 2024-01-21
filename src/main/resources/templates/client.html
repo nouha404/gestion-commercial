@@ -82,9 +82,11 @@ mb-3 " >
                 <tr th:each="cl:${clients}">
                     <td th:text="${cl.nomComplet}"></td>
                     <td th:text="${cl.telephone}"></td><td th:text="${cl.adresse}"></td>
-                    <td ><a href="#"
-                            th:href="@{cl}"
+                    <td ><a
+                            th:href="@{liste-commande(id=${cl.id})}"
                             class="btn
+
+
 btn-outline-success" >Mes Commandes</a></td>
                 </tr>
 

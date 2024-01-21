@@ -12,8 +12,9 @@ public interface ClientController {
                         );
 
 
-    @GetMapping("/liste-commande/${id}")
-    String listeCommande(Model model
+    @GetMapping("/liste-commande")
+    String listeCommande(Model model,
+                         @RequestParam(name="id") long id
                           );
 
 }

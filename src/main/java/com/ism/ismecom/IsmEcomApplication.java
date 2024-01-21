@@ -21,5 +21,10 @@ public class IsmEcomApplication implements CommandLineRunner {
 		clientRepository.findAllByActiveTrue().stream().forEach(client -> {
 			System.out.println(client.getNomComplet()+" "+client.getActive());
 		});
+
+		//      List<Client> client = clientRepository.findClientById(id);
+		clientRepository.findClientById(4L).stream().forEach(client -> {
+			System.out.println(client.getNomComplet());
+		});
 	}
 }

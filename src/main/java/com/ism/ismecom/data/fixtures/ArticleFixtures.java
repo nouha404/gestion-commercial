@@ -1,7 +1,9 @@
 package com.ism.ismecom.data.fixtures;
 
 import com.ism.ismecom.data.entities.Article;
+import com.ism.ismecom.data.entities.Categorie;
 import com.ism.ismecom.data.repositories.ArticleRepository;
+import com.ism.ismecom.data.repositories.CategorieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -14,10 +16,10 @@ import org.springframework.stereotype.Component;
 public class ArticleFixtures implements CommandLineRunner {
     //injection de dependance avec @RequiredArgsConstructor
     private final ArticleRepository articleRepository;
-
+    private final CategorieRepository categorieRepository;
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 1; i < 20; i++) {
+        for (long i = 1L; i < 21L; i++) {
             Article article = new Article();
             article.setLibelle("Article 00"+i);
             article.setAncienPrix(5+i+000.0+i);
@@ -31,6 +33,10 @@ public class ArticleFixtures implements CommandLineRunner {
             article.setPhoto("photo"+i+".png");
             article.setQteStock(1+i+0+i+0.+i+1);
             article.setActive(i%2==0);
+
+            //recherche de categ
+            Categorie categorie = categorieRepository.findById(i).orElse(null);
+            article.setCategorie(categorie);
 
             //insert
             articleRepository.save(article);

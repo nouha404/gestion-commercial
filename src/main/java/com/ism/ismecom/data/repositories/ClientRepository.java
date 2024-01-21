@@ -8,7 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client,Long> {
+    List<Client> findAllByActive(Boolean active);
+
     List<Client> findAllByActiveTrue();
     Page<Client> findAllByActiveTrue(Pageable pageable);
-    List<Client> findAllByActive(Boolean active);
+    List<Client> findClientById(Long id);
+
+    Client findClientById(int id);
+
+
 }
