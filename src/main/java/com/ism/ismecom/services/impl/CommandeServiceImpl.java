@@ -4,6 +4,8 @@ import com.ism.ismecom.data.entities.Commande;
 import com.ism.ismecom.data.repositories.CommandeRepository;
 import com.ism.ismecom.services.CommandeService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,5 +19,10 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public List<Commande> getCommandeByFiltre(Long id) {
         return commandeRepository.findCommandeById(id);
+    }
+
+    @Override
+    public Page<Commande> getCommandeByFiltre(Pageable page, Long id) {
+        return commandeRepository.findCommandeById(page,id);
     }
 }

@@ -15,7 +15,10 @@ public interface ClientController {
 
     @GetMapping("/liste-commande")
     String listeCommande(Model model,
+                         @RequestParam(defaultValue = "0",name = "page") int page,
+                         @RequestParam(defaultValue = "5",name = "size") int size,
                          @RequestParam(name="id") long id
+
                           );
 
 }

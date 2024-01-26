@@ -49,20 +49,20 @@ public class ClientControllerImpl implements ClientController {
     }
 
     @Override
-    public String listeCommande(Model model, long id) {
-        List<Commande> commandes = commandeService.getCommandeByFiltre(id);
-        //Page<Commande> commandes = commandeRepository.findCommandeByClientId(id,PageRequest.of(0, 10));
+    public String listeCommande(Model model,
+                                @RequestParam(defaultValue = "0",name = "page") int page,
+                                @RequestParam(defaultValue = "5",name = "size") int size,
+                                long id
+    ) {
+        Page<Commande> commandes = commandeService.getCommandeByFiltre(PageRequest.of(page,size),id);
         model.addAttribute("commandes",commandes);
 
-
-        List<Client> client = clientService.getClientById(id);
-        //List<Client> client = clientRepository.findClientById(id);
-
+        /*
+        * List<Client> client = clientService.getClientById(id);
         //un seul client donc
         if (!client.isEmpty()) {
             model.addAttribute("client", client.get(0));
-        }
-
+        }*/
 
         return "commande";
     }

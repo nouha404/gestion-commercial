@@ -65,7 +65,7 @@ btn-outline-success" >Mes Commandes</a></td>
                         <a
                            th:class="${statut.index==currentPage? 'page-link active' : 'page-link'}"
                            th:text="${statut.index+1}"
-                           th:href="@{liste-client(page=${statut.index}, telephone=${statut.index})}"
+                           th:href="@{liste-client(page=${statut.index}, telephone=${telephone})}"
 
                             >
 
@@ -87,7 +87,6 @@ btn-outline-success" >Mes Commandes</a></td>
         </div>
     </div>
     <!-- Content here -->
-
 
 </div>
 
