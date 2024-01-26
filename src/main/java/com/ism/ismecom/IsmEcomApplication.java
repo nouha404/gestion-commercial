@@ -1,10 +1,12 @@
 package com.ism.ismecom;
 
 import com.ism.ismecom.data.repositories.ClientRepository;
+import com.ism.ismecom.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Pageable;
 
 @SpringBootApplication
 public class IsmEcomApplication implements CommandLineRunner {
@@ -15,6 +17,7 @@ public class IsmEcomApplication implements CommandLineRunner {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	private ClientService clientService;
 	@Override
 	public void run(String... args) throws Exception {
 		//Liste des clients
@@ -26,5 +29,6 @@ public class IsmEcomApplication implements CommandLineRunner {
 		clientRepository.findClientById(4L).stream().forEach(client -> {
 			System.out.println(client.getNomComplet());
 		});
+
 	}
 }

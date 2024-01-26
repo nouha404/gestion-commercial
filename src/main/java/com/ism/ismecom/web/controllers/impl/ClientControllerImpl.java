@@ -4,6 +4,8 @@ import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.data.entities.Commande;
 import com.ism.ismecom.data.repositories.ClientRepository;
 import com.ism.ismecom.data.repositories.CommandeRepository;
+import com.ism.ismecom.services.ClientService;
+import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.controllers.ClientController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,17 +20,22 @@ import java.util.List;
 @Controller
 public class ClientControllerImpl implements ClientController {
     //injection par contructeur
-    private final ClientRepository clientRepository;
-    private final CommandeRepository commandeRepository;
+    private  final ClientService clientService;
+    private final CommandeService commandeService;
     @Override
     public String listerClient(
             Model model,
             @RequestParam(defaultValue = "0",name = "page") int page,
-            @RequestParam(defaultValue = "5",name = "size") int size
+            @RequestParam(defaultValue = "5",name = "size") int size,
+            @RequestParam(defaultValue = "",name = "telephone") String telephone
     ) {
-
-        Page<Client> clients =  clientRepository.findAllByActiveTrue(PageRequest.of(page,size));
+        //formulaire
+        Page<Client> clients = clientService.getClientsWithPaginateAndFilter(PageRequest.of(page,size),telephone);
         model.addAttribute("clients",clients.getContent());
+        //mettre le numero dans le placeholder ou le value du formulaire
+        model.addAttribute("telephone", telephone);
+
+
         //creer un tableau pour le nombre de pages
         model.addAttribute("pages",new int[clients.getTotalPages()]);
         //position de la page
@@ -43,11 +50,13 @@ public class ClientControllerImpl implements ClientController {
 
     @Override
     public String listeCommande(Model model, long id) {
-        List<Commande> commandes = commandeRepository.findCommandeById(id);
+        List<Commande> commandes = commandeService.getCommandeByFiltre(id);
         //Page<Commande> commandes = commandeRepository.findCommandeByClientId(id,PageRequest.of(0, 10));
         model.addAttribute("commandes",commandes);
 
-        List<Client> client = clientRepository.findClientById(id);
+
+        List<Client> client = clientService.getClientById(id);
+        //List<Client> client = clientRepository.findClientById(id);
 
         //un seul client donc
         if (!client.isEmpty()) {

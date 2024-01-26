@@ -8,12 +8,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client,Long> {
-    List<Client> findAllByActive(Boolean active);
-
-    List<Client> findAllByActiveTrue();
     Page<Client> findAllByActiveTrue(Pageable pageable);
+    Page<Client> findAllByTelephoneContainsAndActiveTrue(Pageable pageable,String telephone);
+
+    //Pour le test dans la console
+    List<Client> findAllByActiveTrue();
     List<Client> findClientById(Long id);
 
+    Page<Client> findClientById(Pageable pageable,Long id);
+
+
+    //Page<Client> findClientById(Long id);
     //Client findClientById(int id);
 
 

@@ -18,6 +18,16 @@
             <h3>Liste des Clients</h3>
         </div>
         <div class="card-body">
+            <!--Formulaire de recherche-->
+            <form method="get" class="d-flex w-50 mb-5">
+                <input type="search" name="telephone"
+                       id="telephone" aria-label="search" class="mb-2"
+                        th:value="${telephone}"
+                       th:action="@{/liste-client}"
+                >
+                <button type="submit" class="btn btn-outline-success ">Search</button>
+            </form>
+
             <table class="table table-bordered">
                 <thead>
                 <th>Nom et Prenom</th>
@@ -55,7 +65,7 @@ btn-outline-success" >Mes Commandes</a></td>
                         <a
                            th:class="${statut.index==currentPage? 'page-link active' : 'page-link'}"
                            th:text="${statut.index+1}"
-                           th:href="@{liste-client(page=${statut.index})}"
+                           th:href="@{liste-client(page=${statut.index}, telephone=${statut.index})}"
 
                             >
 
