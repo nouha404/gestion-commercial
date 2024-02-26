@@ -10,4 +10,5 @@ public interface ClientService {
     Page<Client> getAllClientsActive(Pageable pageable);
     Page<Client> getClientsWithPaginateAndFilter(Pageable pageable,String telephone);
     List<Client> getClientById(Long id);
+
 }

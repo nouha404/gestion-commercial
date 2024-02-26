@@ -19,6 +19,6 @@
 #### Liste des clients
 <img src="./images/template-client.png" alt="Liste des clients"/>
 
-#### Commande d'un client
-<img src="./images/template-commande.png
-" alt="Commande d'un client"/>
+
+#### Commande d'un client avec pagination quand on clique sur le bouton au niveau de la page client
+<img src="./images/unCommande.png" alt="Commande d'un client"/>

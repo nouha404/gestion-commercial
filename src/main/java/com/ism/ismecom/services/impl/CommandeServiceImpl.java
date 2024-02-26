@@ -16,13 +16,14 @@ import java.util.List;
 public class CommandeServiceImpl implements CommandeService {
     //injection de dependance
     private  final CommandeRepository commandeRepository;
+
     @Override
-    public List<Commande> getCommandeByFiltre(Long id) {
-        return commandeRepository.findCommandeById(id);
+    public Page<Commande> getAllCommande(Pageable page) {
+        return commandeRepository.findAllByActiveTrue(page);
     }
 
     @Override
-    public Page<Commande> getCommandeByFiltre(Pageable page, Long id) {
-        return commandeRepository.findCommandeById(page,id);
+    public Page<Commande> getCommandeByClient(Long id,Pageable pageable) {
+        return commandeRepository.findCommandesByClientId(id,pageable);
     }
 }

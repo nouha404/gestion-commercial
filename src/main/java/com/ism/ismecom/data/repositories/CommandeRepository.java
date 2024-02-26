@@ -10,10 +10,11 @@ import java.util.List;
 
 public interface CommandeRepository extends JpaRepository<Commande,Long> {
     Page<Commande> findCommandeById(Pageable page, Long id);
-    //List<Client> findCommandeById(Long id);
-    //Page<Commande> findCommandeByClientId(Long client_id,Pageable pageable);
 
-    List<Commande> findCommandeByClientId(Long client_id);
     List<Commande> findCommandeById(Long id);
+    Page<Commande> findAllByActiveTrue(Pageable page);
+    Page<Commande> findCommandesByClientId(Long id,Pageable page);
+
+
 
 }

@@ -30,4 +30,6 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> getClientById(Long id) {
         return clientRepository.findClientById(id);
     }
+
+
 }

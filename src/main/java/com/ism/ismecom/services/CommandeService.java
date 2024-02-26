@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface CommandeService {
-    List<Commande> getCommandeByFiltre(Long id);
-    Page<Commande> getCommandeByFiltre(Pageable page, Long id);
+
+    Page<Commande> getAllCommande(Pageable page);
+    Page<Commande> getCommandeByClient(Long id,Pageable pageable);
 }
