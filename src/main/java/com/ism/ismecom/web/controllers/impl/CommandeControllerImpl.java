@@ -5,6 +5,7 @@ import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.controllers.CommandeController;
+import com.ism.ismecom.web.dto.response.CommandeShowEntityResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,9 +32,10 @@ public class CommandeControllerImpl implements CommandeController {
 
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Commande> commandes = commandeService.getCommandeByClient(id,pageable) ;
-
-        model.addAttribute("commandes",commandes);
+        Page<Commande> commandes = commandeService.getCommandeByClient(id,pageable);
+        //transformer objet type Commande => commandeDto
+        Page<CommandeShowEntityResponseDto> commandesDto = commandes.map(CommandeShowEntityResponseDto::toDto);
+        model.addAttribute("commandes",commandesDto);
 
         model.addAttribute("clientId",id);
         model.addAttribute("pages",new int[commandes.getTotalPages()]);

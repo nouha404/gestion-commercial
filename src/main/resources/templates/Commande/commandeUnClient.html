@@ -43,7 +43,11 @@
                     <td th:text="${commande.dateCommand}"></td>
                     <td th:text="${commande.montant}"></td>
                     <td th:text="${commande.adresse}"></td>
-                    <td th:text="${commande.etat}"></td>
+
+                    <td>
+                        <a class="btn btn-outline-warning"
+                            th:text="${commande.etatSuivant}"></a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

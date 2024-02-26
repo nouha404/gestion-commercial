@@ -3,6 +3,8 @@ package com.ism.ismecom.web.controllers.impl;
 import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.web.controllers.ClientController;
+import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
+import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,13 +27,16 @@ public class ClientControllerImpl implements ClientController {
     ) {
         //formulaire
         Page<Client> clients = clientService.getClientsWithPaginateAndFilter(PageRequest.of(page,size),telephone);
-        model.addAttribute("clients",clients.getContent());
+        //transformer objet type client => clientDto
+        Page<ClientShowEntityResponseDto> clientsDto = clients.map(ClientShowEntityResponseDto::toDto);
+
+
+
+        model.addAttribute("clients",clientsDto.getContent());
         //mettre le numero dans le placeholder ou le value du formulaire
         model.addAttribute("telephone", telephone);
-
-
         //creer un tableau pour le nombre de pages
-        model.addAttribute("pages",new int[clients.getTotalPages()]);
+        model.addAttribute("pages",new int[clientsDto.getTotalPages()]);
         //position de la page
         model.addAttribute("currentPage",page);
 
@@ -42,6 +47,21 @@ public class ClientControllerImpl implements ClientController {
         return "Client/client";
     }
 
+    @Override
+    public String showForm(Model model) {
+        //Mapper le dto creer pour le formulaire Avec builder
+        //CreateClientRequestDto clientCreateRequestDto = new CreateClientRequestDto();
+        CreateClientRequestDto clientCreateRequestDto = CreateClientRequestDto.builder().build();
+        model.addAttribute("client",clientCreateRequestDto);
+        return "Client/add-client";
+    }
+
+
+    //a faire
+    @Override
+    public String saveClient(Model model) {
+        return null;
+    }
 
 
 }

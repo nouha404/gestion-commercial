@@ -20,7 +20,11 @@
     <div class="card mt-1">
         <div class="card-header">
             <h3>Liste des Clients</h3>
+            <div class="my- float-end">
+                <a  class="btn btn-outline-info " th:href="@{/show-client-form}">Nouveau</a>
+            </div>
         </div>
+
         <div class="card-body">
             <!--Formulaire de recherche-->
             <form method="get" class="d-flex w-50 mb-5">
@@ -36,14 +40,18 @@
                 <thead>
                 <th>Nom et Prenom</th>
                 <th>Telephone</th>
-                <th>Adresse</th>
+                <th>Quartier</th>
+                <th>Numero Villa</th>
                 <th>Commandes</th>
                 </thead>
                 <tbody>
 
                 <tr th:each="cl:${clients}">
                     <td th:text="${cl.nomComplet}"></td>
-                    <td th:text="${cl.telephone}"></td><td th:text="${cl.adresse}"></td>
+                    <td th:text="${cl.telephone}"></td>
+                    <td th:text="${cl.quartier}"></td>
+                    <td th:text="${cl.numVilla}"></td>
+
                     <td ><a
                             th:href="@{liste-commande(id=${cl.id})}"
                             class="btn btn-outline-success" >Mes Commandes</a></td>
