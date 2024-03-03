@@ -3,6 +3,7 @@ package com.ism.ismecom.services.impl;
 import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.data.repositories.ClientRepository;
 import com.ism.ismecom.services.ClientService;
+import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,13 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> getClientById(Long id) {
         return clientRepository.findClientById(id);
+    }
+
+    @Override
+    public void addClient(CreateClientRequestDto dto) {
+        Client transformToEntity = dto.TransformToEntity();
+        transformToEntity.setActive(true);
+        clientRepository.save(transformToEntity);
     }
 
 

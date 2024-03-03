@@ -29,7 +29,5 @@ public class CreateClientRequestDto {
                 .adresse(new Adresse(quartier,ville,numVilla))
                 .build();
 
-
-
     }
 }

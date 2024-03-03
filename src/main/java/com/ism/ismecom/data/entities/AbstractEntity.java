@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @MappedSuperclass()

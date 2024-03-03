@@ -10,8 +10,8 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Table(name = "categories")
 public class Categorie extends AbstractEntity{

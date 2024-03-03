@@ -1,5 +1,6 @@
 package com.ism.ismecom.web.controllers;
 
+import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,6 @@ public interface ClientController {
     String showForm(Model model);
 
     @PostMapping("/save-client")
-    String saveClient(Model model);
+    String saveClient(CreateClientRequestDto clientDto);
 
 }

@@ -53,15 +53,20 @@ public class ClientControllerImpl implements ClientController {
         //CreateClientRequestDto clientCreateRequestDto = new CreateClientRequestDto();
         CreateClientRequestDto clientCreateRequestDto = CreateClientRequestDto.builder().build();
         model.addAttribute("client",clientCreateRequestDto);
-        return "Client/add-client";
+        return "Client/form-add-client";
     }
-
 
     //a faire
     @Override
-    public String saveClient(Model model) {
-        return null;
+    public String saveClient(CreateClientRequestDto clientDto) {
+        clientService.addClient(clientDto);
+        System.out.println(clientDto.getNomComplet());
+        return "redirect:/show-client-form";
     }
+
+
+
+
 
 
 }
