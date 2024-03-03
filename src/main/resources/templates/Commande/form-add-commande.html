@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base"
+
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire</title>
+</head>
+<body>
+<div class="container" layout:fragment="contentForView">
+    <div class="card mt-2">
+        <div class="card-header">
+            <h5>Enregistrement d'une commande</h5>
+        </div>
+        <div class="card-body">
+            <form class="col-md-8 offset-2"
+                  method="post" th:action="@{/save-commande}">
+
+                <div>
+                    <button type="submit" class="float-end btn btn-primary">Enregister</button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

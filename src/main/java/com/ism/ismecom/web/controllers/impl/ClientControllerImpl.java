@@ -5,12 +5,20 @@ import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.web.controllers.ClientController;
 import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
 import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -58,15 +66,34 @@ public class ClientControllerImpl implements ClientController {
 
     //a faire
     @Override
-    public String saveClient(CreateClientRequestDto clientDto) {
-        clientService.addClient(clientDto);
-        System.out.println(clientDto.getNomComplet());
+    public String saveClient(
+            @Valid CreateClientRequestDto clientDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        if(bindingResult.hasErrors()){
+            Map<String, String> errors = new HashMap<>();
+            //maintenant parcourir et les transformer en map
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            fieldErrors.forEach(fieldError -> errors.put(
+                    fieldError.getField(), fieldError.getDefaultMessage())
+            );
+            //mettre les erreurs dans la view
+            redirectAttributes.addFlashAttribute("mode", "error");
+            redirectAttributes.addFlashAttribute("errors", errors);
+
+            redirectAttributes.addFlashAttribute("nomComplet", clientDto.getNomComplet());
+            redirectAttributes.addFlashAttribute("telephone", clientDto.getTelephone());
+            redirectAttributes.addFlashAttribute("quartier", clientDto.getQuartier());
+            redirectAttributes.addFlashAttribute("numVilla", clientDto.getNumVilla());
+            redirectAttributes.addFlashAttribute("ville", clientDto.getVille());
+        } else {
+            clientService.addClient(clientDto);
+            System.out.println(clientDto.getNomComplet());
+        }
         return "redirect:/show-client-form";
+
     }
-
-
-
-
 
 
 }

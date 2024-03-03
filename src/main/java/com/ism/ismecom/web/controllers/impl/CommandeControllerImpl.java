@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -64,6 +65,21 @@ public class CommandeControllerImpl implements CommandeController {
 
         System.out.println(allCommandes);
         return "Commande/commande";
+    }
+
+    @Override
+    public String showFormCommande(
+            Model model,
+           @RequestParam(name="id") long id
+    ) {
+        //CreateCommandeRequestDto commandeRequestDto = CreateCommandeRequestDto.builder().build();
+        //model.addAttribute("commande",commandeRequestDto);
+        return "Commande/form-add-commande";
+    }
+
+    @Override
+    public String saveCommande() {
+        return null;
     }
 
 
