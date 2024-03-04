@@ -9,6 +9,7 @@ import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.controllers.CommandeController;
 import com.ism.ismecom.web.dto.request.PanierDto;
 import com.ism.ismecom.web.dto.response.ArticleSimpleResponseDto;
+import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
 import com.ism.ismecom.web.dto.response.CommandeShowEntityResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,7 @@ public class CommandeControllerImpl implements CommandeController {
     //injection de dependance
     private final CommandeService commandeService;
     private final ArticleService articleService;
+    private final ClientService clientService;
 
     @Override
     public String listeCommande(Model model,
@@ -87,9 +89,19 @@ public class CommandeControllerImpl implements CommandeController {
             @ModelAttribute("panier") PanierDto panier
     ) {
         List<Article> articles = articleService.getArticlesFormCommande();
-        List<ArticleSimpleResponseDto> listArticleDto = articles.stream().map(article -> new ArticleSimpleResponseDto(article.getId(), article.getLibelle())).toList();
-       model.addAttribute("articleSelectForm", listArticleDto);
+        Client clientById = clientService.getClById(id);
+        if (clientById == null){
+            return "redirect:/liste-client";
+        }
+        // Transformer Client en ClientShowEntityResponseDto
+        ClientShowEntityResponseDto clientDto = ClientShowEntityResponseDto.toDto(clientById);
+        panier.setClient(clientDto);
+        //panier.setClient(ClientShowEntityResponseDto.toDto(clientById)); erreur quand je fais ca ? so j'ai mis setClient dans PanierDto
+        //panier.setClient(clientById);
 
+        List<ArticleSimpleResponseDto> listArticleDto = articles.stream().map(article -> new ArticleSimpleResponseDto(article.getId(), article.getLibelle())).toList();
+        model.addAttribute("articleSelectForm", listArticleDto);
+        model.addAttribute("panier", panier);
         return "Commande/form-add-commande";
     }
 

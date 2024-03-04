@@ -16,7 +16,13 @@ import java.util.List;
 public class PanierDto {
     private List<ArticlePanierDto> articles;
     private double total;
-    private Client client;
+    private ClientShowEntityResponseDto client;
+
+    /*
+    public void setClient(Client client) {
+        this.client = client;
+    }*/
+
 
 
 }

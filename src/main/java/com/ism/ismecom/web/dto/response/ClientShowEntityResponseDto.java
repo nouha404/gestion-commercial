@@ -14,14 +14,31 @@ public class ClientShowEntityResponseDto {
     private String telephone;
     private String quartier;
     private String numVilla;
+    private String adresseComplet;
+
+
+    private void adresseComplet(){
+        adresseComplet =  String.format("%s %s", quartier,numVilla);
+    }
 
     //transformer le type client en un type dto => mapper sans builder
     public static ClientShowEntityResponseDto toDto(Client client){
-        return new ClientShowEntityResponseDto(
+        ClientShowEntityResponseDto clientShowEntityResponseDto = new ClientShowEntityResponseDto(
                 client.getId(),
                 client.getNomComplet(),
                 client.getTelephone(),
                 client.getAdresse().getQuartier(),
-                client.getAdresse().getNumVilla());
+                client.getAdresse().getNumVilla(),null
+        );
+        clientShowEntityResponseDto.adresseComplet();
+        return clientShowEntityResponseDto;
+
     }
+
+
+
+
+
+
+
 }

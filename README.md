@@ -63,3 +63,10 @@ quand une commande est   Facturer    => Payer
 
 <br/>
 <img src="./images/formAdd.png" alt="formulaire d'ajout d'un client"/>
+
+
+#### Ajouter une nouvelle commande
+<img src="./images/nouvelle.png" alt="nouvelle commande"/>
+
+#### Formulaire ajout d'une nouvelle commande + affichage des infos du client dans le formulaire
+<img src="./images/nouvelle1.png" alt="nouvelle commande"/>
