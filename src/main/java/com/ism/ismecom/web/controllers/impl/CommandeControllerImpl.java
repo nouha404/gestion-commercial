@@ -1,10 +1,14 @@
 package com.ism.ismecom.web.controllers.impl;
 
+import com.ism.ismecom.data.entities.Article;
 import com.ism.ismecom.data.entities.Commande;
 import com.ism.ismecom.data.entities.Client;
+import com.ism.ismecom.services.ArticleService;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.controllers.CommandeController;
+import com.ism.ismecom.web.dto.request.PanierDto;
+import com.ism.ismecom.web.dto.response.ArticleSimpleResponseDto;
 import com.ism.ismecom.web.dto.response.CommandeShowEntityResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,17 +16,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@SessionAttributes({"panier"})
 public class CommandeControllerImpl implements CommandeController {
     //injection de dependance
     private final CommandeService commandeService;
-    private final ClientService clientService;
+    private final ArticleService articleService;
 
     @Override
     public String listeCommande(Model model,
@@ -67,13 +75,20 @@ public class CommandeControllerImpl implements CommandeController {
         return "Commande/commande";
     }
 
+    //bean panier pour la session
+    @ModelAttribute("panier")
+    public PanierDto panier(){return new PanierDto(
+            new ArrayList<>(),0,null);
+    }
     @Override
     public String showFormCommande(
             Model model,
            @RequestParam(name="id") long id
     ) {
-        //CreateCommandeRequestDto commandeRequestDto = CreateCommandeRequestDto.builder().build();
-        //model.addAttribute("commande",commandeRequestDto);
+        List<Article> articles = articleService.getArticlesFormCommande();
+        List<ArticleSimpleResponseDto> listArticleDto = articles.stream().map(article -> new ArticleSimpleResponseDto(article.getId(), article.getLibelle())).toList();
+       model.addAttribute("articleSelectForm", listArticleDto);
+
         return "Commande/form-add-commande";
     }
 

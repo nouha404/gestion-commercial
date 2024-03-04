@@ -16,20 +16,107 @@
             <h5>Enregistrement d'une commande</h5>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <input
+                            readonly
+
+                            type="text" class="form-control"  aria-label="First name">
+                </div>
+                <div class="col">
+                    <input
+
+                            readonly
+                            type="text" class="form-control"  aria-label="Last name">
+                </div>
+                <div class="col">
+                    <input
+                            readonly
+                            type="text" class="form-control"  aria-label="Last name">
+                </div>
+            </div>
+
+            <!--End Info Client-->
             <form class="col-md-8 offset-2"
                   method="post" th:action="@{/save-commande}">
+                <div class="row">
+                    <div class="col">
+                        <select
+                                name="article"
+                                class="form-select" aria-label="Default select example">
+                            <option th:each="article:${articleSelectForm}"
+                                    th:value="${article.id}"
+                                    th:text="${article.libelle}"
+                            ></option>
 
-                <div>
-                    <button type="submit" class="float-end btn btn-primary">Enregister</button>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input
+
+                                name="prix"
+                                placeholder="Prix Achat"
+                                type="text" class="form-control"  aria-label="First name">
+                    </div>
+                    <div class="col">
+                        <input
+
+                                name="quantite"
+                                PLACEHOLDER="Quantite"
+
+                                type="text" class="form-control"  aria-label="Last name">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-success" type="submit">Ajouter</button>
+                    </div>
+
                 </div>
 
+
             </form>
+
+            <!--Table -->
+            <h5 class="my-3">Panier Article</h5>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Prix</th>
+                    <th>Qte</th>
+                    <th>Montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <!--Total-->
+            <div class="row ">
+                <div class="col ">
+                    <button type="button" class="btn btn-info fs-5">
+                        Total <span class="badge  text-white fs-4 font-monospace"
+
+                    ></span>
+                    </button>
+                </div>
+                <div class="col  ">
+                    <a  class="btn btn-success float-end">
+                        Enregister
+                    </a>
+                </div>
+            </div>
 
 
 
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
