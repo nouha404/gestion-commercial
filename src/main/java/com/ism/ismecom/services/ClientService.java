@@ -13,5 +13,6 @@ public interface ClientService {
     List<Client> getClientById(Long id);
 
     void addClient(CreateClientRequestDto dto);
+    Client getClById(Long id);
 
 }

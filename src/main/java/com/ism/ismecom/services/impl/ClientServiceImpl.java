@@ -39,5 +39,10 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.save(transformToEntity);
     }
 
+    @Override
+    public Client getClById(Long id) {
+        return clientRepository.findById(id).orElse(null);
+    }
+
 
 }

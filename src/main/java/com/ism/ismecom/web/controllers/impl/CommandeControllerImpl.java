@@ -83,7 +83,8 @@ public class CommandeControllerImpl implements CommandeController {
     @Override
     public String showFormCommande(
             Model model,
-           @RequestParam(name="id") long id
+           @RequestParam(name="id") long id,
+            @ModelAttribute("panier") PanierDto panier
     ) {
         List<Article> articles = articleService.getArticlesFormCommande();
         List<ArticleSimpleResponseDto> listArticleDto = articles.stream().map(article -> new ArticleSimpleResponseDto(article.getId(), article.getLibelle())).toList();
