@@ -39,11 +39,15 @@
 
             <!--End Info Client-->
             <form class="col-md-8 offset-2"
-                  method="post" th:action="@{/save-commande}">
+                  method="post" th:action="@{/add-panier}"
+                  th:object="${articleForm}"
+            >
+
                 <div class="row">
                     <div class="col">
                         <select
                                 name="article"
+                                th:field="*{id}"
                                 class="form-select" aria-label="Default select example">
                             <option th:each="article:${articleSelectForm}"
                                     th:value="${article.id}"
@@ -54,14 +58,15 @@
                     </div>
                     <div class="col">
                         <input
-
+                                th:field="*{prix}"
                                 name="prix"
                                 placeholder="Prix Achat"
                                 type="text" class="form-control"  aria-label="First name">
                     </div>
+
                     <div class="col">
                         <input
-
+                                th:field="*{quantite}"
                                 name="quantite"
                                 PLACEHOLDER="Quantite"
 
@@ -88,11 +93,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr >
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
+                <tr th:each="articlePanier:${panier.articlesPanier}">
+                    <td th:text="${articlePanier.libelle}"></td>
+                    <td th:text="${articlePanier.prix}"></td>
+                    <td th:text="${articlePanier.quantite}"></td>
+                    <td th:text="${articlePanier.montant}"></td>
                 </tr>
                 </tbody>
 
@@ -103,8 +108,9 @@
                 <div class="col ">
                     <button type="button" class="btn btn-info fs-5">
                         Total <span class="badge  text-white fs-4 font-monospace"
+                                    th:text="${panier.total}"
 
-                    ></span>
+                    >0.0</span>
                     </button>
                 </div>
                 <div class="col  ">

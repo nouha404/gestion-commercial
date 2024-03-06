@@ -32,8 +32,5 @@ public interface CommandeController {
             @ModelAttribute("panier") PanierDto panier
     );
 
-    @PostMapping("/save-commande")
-    String saveCommande(
 
-    );
 }

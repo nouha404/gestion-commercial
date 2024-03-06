@@ -7,6 +7,7 @@ import com.ism.ismecom.services.ArticleService;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.controllers.CommandeController;
+import com.ism.ismecom.web.dto.request.ArticlePanierDto;
 import com.ism.ismecom.web.dto.request.PanierDto;
 import com.ism.ismecom.web.dto.response.ArticleSimpleResponseDto;
 import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
@@ -97,18 +98,14 @@ public class CommandeControllerImpl implements CommandeController {
         ClientShowEntityResponseDto clientDto = ClientShowEntityResponseDto.toDto(clientById);
         panier.setClient(clientDto);
         //panier.setClient(ClientShowEntityResponseDto.toDto(clientById)); erreur quand je fais ca ? so j'ai mis setClient dans PanierDto
-        //panier.setClient(clientById);
 
         List<ArticleSimpleResponseDto> listArticleDto = articles.stream().map(article -> new ArticleSimpleResponseDto(article.getId(), article.getLibelle())).toList();
         model.addAttribute("articleSelectForm", listArticleDto);
         model.addAttribute("panier", panier);
+        model.addAttribute("articleForm", new ArticlePanierDto());
         return "Commande/form-add-commande";
     }
 
-    @Override
-    public String saveCommande() {
-        return null;
-    }
 
 
 }

@@ -70,3 +70,6 @@ quand une commande est   Facturer    => Payer
 
 #### Formulaire ajout d'une nouvelle commande + affichage des infos du client dans le formulaire
 <img src="./images/nouvelle1.png" alt="nouvelle commande"/>
+
+#### Enregistrement d'une commande
+<img src="./images/enregistrement.png" alt="nouvelle commande"/>
