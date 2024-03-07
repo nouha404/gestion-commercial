@@ -56,9 +56,6 @@ public class CommandeControllerImpl implements CommandeController {
         model.addAttribute("nextPage", page < commandes.getTotalPages() - 1 ? page+1:page);
         model.addAttribute("PreviousPage", page > 0 ? page-1:page);
 
-
-
-
         return "Commande/commandeUnClient";
     }
 
@@ -106,6 +103,16 @@ public class CommandeControllerImpl implements CommandeController {
         return "Commande/form-add-commande";
     }
 
+    @Override
+    public String saveCommande(Model model, PanierDto panier) {
+        //recuperer le panier
+        commandeService.saveCommande(panier);
+        //renitialiser le panier
+        model.addAttribute("panier",panier());
+
+        return "redirect:/liste-commande?id="+panier.getClient().getId();
+        //
+    }
 
 
 }

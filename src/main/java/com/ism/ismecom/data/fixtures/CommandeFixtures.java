@@ -46,10 +46,10 @@ public class CommandeFixtures implements CommandLineRunner {
             calendar.add(Calendar.DAY_OF_MONTH, (int) i);
             Date incrementedDate = calendar.getTime();
             // Formattage de la date en "yyyy-MM-dd"
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = dateFormat.format(incrementedDate);
+            //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            //String formattedDate = dateFormat.format(incrementedDate);
 
-            commande.setDateCommand(java.sql.Date.valueOf(formattedDate));
+            commande.setDateCommand(incrementedDate);
 
             //generer a partir des enumerations
             EtatCommande etatCommande = EtatCommande.values()[(int) (Math.random() * EtatCommande.values().length)];

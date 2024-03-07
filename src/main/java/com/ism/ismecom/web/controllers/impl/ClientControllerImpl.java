@@ -4,6 +4,7 @@ import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.web.controllers.ClientController;
 import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
+import com.ism.ismecom.web.dto.request.PanierDto;
 import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +14,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@SessionAttributes({"panier"})
 public class ClientControllerImpl implements ClientController {
     //injection par contructeur
     private  final ClientService clientService;
@@ -31,8 +36,12 @@ public class ClientControllerImpl implements ClientController {
             Model model,
             @RequestParam(defaultValue = "0",name = "page") int page,
             @RequestParam(defaultValue = "5",name = "size") int size,
-            @RequestParam(defaultValue = "",name = "telephone") String telephone
+            @RequestParam(defaultValue = "",name = "telephone") String telephone,
+            @ModelAttribute("panier") PanierDto panier
     ) {
+
+        //initialiser le panier mettre le total aussi a 0
+        panier();
         //formulaire
         Page<Client> clients = clientService.getClientsWithPaginateAndFilter(PageRequest.of(page,size),telephone);
         //transformer objet type client => clientDto
@@ -62,6 +71,12 @@ public class ClientControllerImpl implements ClientController {
         CreateClientRequestDto clientCreateRequestDto = CreateClientRequestDto.builder().build();
         model.addAttribute("client",clientCreateRequestDto);
         return "Client/form-add-client";
+    }
+
+    //creer le panier au démarrage
+    @ModelAttribute("panier")
+    public PanierDto panier(){return new PanierDto(
+            new ArrayList<>(),0,null);
     }
 
     //a faire

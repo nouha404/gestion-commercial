@@ -32,5 +32,12 @@ public interface CommandeController {
             @ModelAttribute("panier") PanierDto panier
     );
 
+    @GetMapping("/save-commande")
+    String saveCommande(
+            Model model,
+            @ModelAttribute("panier") PanierDto panier
+
+    );
+
 
 }
