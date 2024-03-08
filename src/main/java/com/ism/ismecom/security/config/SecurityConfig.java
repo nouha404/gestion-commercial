@@ -45,6 +45,7 @@ public class SecurityConfig {
                                             .authenticated()
                                     )
             .build();*/
+
             // le template de base
             .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
             ).authorizeHttpRequests( auth -> auth

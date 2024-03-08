@@ -4,6 +4,8 @@ import com.ism.ismecom.data.entities.Adresse;
 import com.ism.ismecom.data.entities.Article;
 import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.data.repositories.ClientRepository;
+import com.ism.ismecom.security.controllers.Security;
+import com.ism.ismecom.security.services.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -18,6 +20,7 @@ public class ClientFixtures implements CommandLineRunner {
     //injection de dependance avec @RequiredArgsConstructor
     private final ClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SecurityService securityService;
     @Override
     public void run(String... args) throws Exception {
         for (long i = 1L; i < 21L; i++) {
@@ -41,6 +44,8 @@ public class ClientFixtures implements CommandLineRunner {
 
             //insert sprint data
             clientRepository.save(client);
+            // role
+            securityService.addRoleToUser(client.getUsername().toLowerCase(),"Client");
         }
     }
 }

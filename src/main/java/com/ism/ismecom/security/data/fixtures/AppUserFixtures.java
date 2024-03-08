@@ -19,5 +19,6 @@ public class AppUserFixtures implements CommandLineRunner {
 
         securityService.saveUser("nouha","nouha12b");
         securityService.addRoleToUser("nouha","Admin");
+        securityService.addRoleToUser("nouha","Client");
     }
 }
