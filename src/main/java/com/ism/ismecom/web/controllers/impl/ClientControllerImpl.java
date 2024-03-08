@@ -41,7 +41,8 @@ public class ClientControllerImpl implements ClientController {
     ) {
 
         //initialiser le panier mettre le total aussi a 0
-        panier();
+        panier.getArticlesPanier().clear();
+        panier.setTotal(0);
         //formulaire
         Page<Client> clients = clientService.getClientsWithPaginateAndFilter(PageRequest.of(page,size),telephone);
         //transformer objet type client => clientDto

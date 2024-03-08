@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Table(name = "commandes")
 public class Commande extends AbstractEntity{
-    @Column(unique = true,nullable = false,length = 50)
+    @Column(unique = false,nullable = true,length = 50)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCommand;

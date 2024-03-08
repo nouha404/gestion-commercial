@@ -47,6 +47,7 @@ public class PanierControllerImpl implements PanierController {
         }*/
         //recuperer le libelle de l'article et le metre dans le panier
         Article article = articleRepository.findById(articleForm.getId()).orElse(null);
+
         if(article!=null){
             articleForm.setPrix(articleForm.getPrix()==null?article.getNouveauPrix():articleForm.getPrix());
             articleForm.setLibelle(article.getLibelle());

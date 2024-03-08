@@ -15,4 +15,8 @@ public class AbstractEntity {
     private Long id;
     @Column(columnDefinition = "boolean default true")
     private Boolean active;
+
+    public AbstractEntity(Boolean active) {
+        this.active = active;
+    }
 }

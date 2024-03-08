@@ -25,7 +25,6 @@ public class Article extends AbstractEntity{
 
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<LigneCommande> ligneCommande;
-
     @ManyToOne
     Categorie categorie;
 }

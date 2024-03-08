@@ -18,6 +18,16 @@ public class LigneCommande extends AbstractEntity{
     private Double montant;
     private Double quantite;
     private Double prix;
+
+    public LigneCommande(Boolean active, Double montant, Double quantite, Double prix, Article article, Commande commande) {
+        super(active);
+        this.montant = montant;
+        this.quantite = quantite;
+        this.prix = prix;
+        this.article = article;
+        this.commande = commande;
+    }
+
     @ManyToOne
     Article article;
     @ManyToOne

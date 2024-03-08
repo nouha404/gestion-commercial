@@ -38,6 +38,5 @@ public class CreateClientRequestDto {
                 .telephone(telephone)
                 .adresse(new Adresse(quartier,ville,numVilla))
                 .build();
-
     }
 }

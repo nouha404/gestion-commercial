@@ -105,8 +105,10 @@ public class CommandeControllerImpl implements CommandeController {
 
     @Override
     public String saveCommande(Model model, PanierDto panier) {
-        //recuperer le panier
+        // ecraser celui qui des dans la session
         commandeService.saveCommande(panier);
+        Long id = panier.getClient().getId();
+        panier = panier();
         //renitialiser le panier
         model.addAttribute("panier",panier());
 

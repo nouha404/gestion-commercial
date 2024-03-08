@@ -1,13 +1,16 @@
 package com.ism.ismecom.web.dto.response;
 
+import com.ism.ismecom.data.entities.Adresse;
 import com.ism.ismecom.data.entities.Client;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ClientShowEntityResponseDto {
     private Long id;
     private String nomComplet;
@@ -17,10 +20,6 @@ public class ClientShowEntityResponseDto {
     private String adresseComplet;
 
 
-    private void adresseComplet(){
-        adresseComplet =  String.format("%s %s", quartier,numVilla);
-    }
-
     //transformer le type client en un type dto => mapper sans builder
     public static ClientShowEntityResponseDto toDto(Client client){
         ClientShowEntityResponseDto clientShowEntityResponseDto = new ClientShowEntityResponseDto(
@@ -28,12 +27,21 @@ public class ClientShowEntityResponseDto {
                 client.getNomComplet(),
                 client.getTelephone(),
                 client.getAdresse().getQuartier(),
-                client.getAdresse().getNumVilla(),null
+                client.getAdresse().getNumVilla(),
+                null
         );
         clientShowEntityResponseDto.adresseComplet();
         return clientShowEntityResponseDto;
 
+
+
     }
+    private void adresseComplet(){
+        adresseComplet =  String.format("%s %s", quartier,numVilla);
+    }
+
+
+
 
 
 }

@@ -8,6 +8,7 @@ import com.ism.ismecom.data.repositories.CommandeRepository;
 import com.ism.ismecom.data.repositories.LigneCommandeRepository;
 import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.dto.request.PanierDto;
+import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -44,16 +45,17 @@ public class CommandeServiceImpl implements CommandeService {
         //Ligne de commande, c'est une liste et panier.getArticlesPanier() et de type article dto → convertir Article donc on stream
         Client client = clientRepository.findById(panier.getClient().getId()).orElse(null);
         if(client!=null){
-            Date dateCommande = new Date();
-
+            //je transforme la chaine adresse en Adresse
             Commande commande = new Commande(
-                    dateCommande,
+                    new Date(),
                     panier.getTotal(),
                     EtatCommande.Encours,
                     null,
                     client,
                     null
             );
+            commande.setActive(true);
+
             commandeRepository.save(commande);
             //les ligne de commandes
             List<LigneCommande> ligneCommande = panier.getArticlesPanier().stream().map(
@@ -63,6 +65,7 @@ public class CommandeServiceImpl implements CommandeService {
                     );
 
                     return new LigneCommande(
+                            true,
                             articlePanierDto.getMontant(),
                             articlePanierDto.getQuantite(),
                             articlePanierDto.getPrix(),
@@ -70,6 +73,7 @@ public class CommandeServiceImpl implements CommandeService {
                             commande
                     );
                 }).toList();
+
                 ligneCommandeRepository.saveAllAndFlush(ligneCommande);
 
         }

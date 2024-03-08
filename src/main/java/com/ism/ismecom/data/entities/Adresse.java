@@ -12,7 +12,6 @@ import lombok.*;
 @Data
 @Table(name = "adresses")
 public class Adresse{
-
     private String quartier;
     private String ville;
     private String numVilla;

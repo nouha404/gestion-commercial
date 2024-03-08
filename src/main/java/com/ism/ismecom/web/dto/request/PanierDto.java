@@ -21,11 +21,6 @@ public class PanierDto {
 
 
     public void addArticleToPanier(ArticlePanierDto article) {
-        /*
-        Optional<ArticlePanierDto> first = articlesPanier
-                .stream()
-                .filter(articlePanierDto -> article.getId() == articlePanierDto.getId())
-                .findFirst();*/
         int i = articlesPanier.indexOf(article);
         double montant = 0.0;
         if(i!=-1){
