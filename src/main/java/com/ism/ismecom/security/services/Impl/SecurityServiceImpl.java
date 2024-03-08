@@ -1,7 +1,7 @@
 package com.ism.ismecom.security.services.Impl;
 
-import com.ism.ismecom.security.controllers.AppRoleRepository;
-import com.ism.ismecom.security.controllers.AppUserRepository;
+import com.ism.ismecom.security.repositories.AppRoleRepository;
+import com.ism.ismecom.security.repositories.AppUserRepository;
 import com.ism.ismecom.security.data.entities.AppRole;
 import com.ism.ismecom.security.data.entities.AppUser;
 import com.ism.ismecom.security.services.SecurityService;
@@ -72,6 +72,8 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = userRepository.findByUsername(username);
+        if (appUser==null) throw new RuntimeException("User not found");
+
         //transformer appUser en UserDetails les roles, ils les appellent GrantyAuthority
         List<SimpleGrantedAuthority> authorities = appUser.getRoles()
                 .stream()

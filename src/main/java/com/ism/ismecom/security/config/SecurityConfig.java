@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -29,21 +31,28 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
-    // Authorisation
+    // Authorisation a moment ou l'authentification est correcte
     @Bean // creer au démarrage
-    public SecurityFilterChain securityFilterChain(HttpSecurity http){
-        // HttpSecurity contient la requete
-        http.formLogin(httpSecurityFormLoginConfigurer -> {
-            // les requetes qu'on laisse passer
-            httpSecurityFormLoginConfigurer.loginPage("/login")
-                    .permitAll()
-        }).authorizeHttpRequests(
-                // les autorisations idem
-                auth -> {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // http contient la requete
+        return http.csrf(AbstractHttpConfigurer::disable)
+            /*avec le tempplate
+            .formLogin(form ->form // les requetes qu'on laisse passer
+                             .loginPage("/login")
+                             .permitAll()
+            ).authorizeHttpRequests( auth -> auth
+                                            .anyRequest()
+                                            .authenticated()
+                                    )
+            .build();*/
+            // le template de base
+            .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
+            ).authorizeHttpRequests( auth -> auth
+                    .anyRequest()
+                    .authenticated()
+            )
+            .build();
 
-                }
-        );
-         return http.build();
     }
 
 

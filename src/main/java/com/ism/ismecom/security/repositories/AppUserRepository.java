@@ -1,4 +1,4 @@
-package com.ism.ismecom.security.controllers;
+package com.ism.ismecom.security.repositories;
 
 import com.ism.ismecom.security.data.entities.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
