@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Order(Ordered.LOWEST_PRECEDENCE - 3)
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class ClientFixtures implements CommandLineRunner {
     //injection de dependance avec @RequiredArgsConstructor
     private final ClientRepository clientRepository;
+    private final PasswordEncoder passwordEncoder;
     @Override
     public void run(String... args) throws Exception {
         for (long i = 1L; i < 21L; i++) {
@@ -33,6 +35,9 @@ public class ClientFixtures implements CommandLineRunner {
             adresse.setVille(i%2==0? "Dakar" : "Mbour");
             adresse.setQuartier("Quartier 0"+i+"0"+i);
             client.setAdresse(adresse);
+
+            client.setPassword(passwordEncoder.encode("nouha12b"));
+            client.setUsername(client.getNomComplet().toLowerCase());
 
             //insert sprint data
             clientRepository.save(client);

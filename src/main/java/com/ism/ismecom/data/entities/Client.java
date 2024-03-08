@@ -1,5 +1,6 @@
 package com.ism.ismecom.data.entities;
 
+import com.ism.ismecom.security.data.entities.AppUser;
 import lombok.Builder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,8 @@ import java.util.List;
 @Data
 @Table(name = "clients")
 @Builder
-public class Client extends AbstractEntity {
+@DiscriminatorValue(value="Client")
+public class Client extends AppUser {
     @Column(nullable = false,length = 50)
     private String nomComplet;
     @Column(nullable = false,length = 20)

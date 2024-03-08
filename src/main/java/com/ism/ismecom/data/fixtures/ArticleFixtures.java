@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.LOWEST_PRECEDENCE - 2)
 @RequiredArgsConstructor
 //@Component
-//@Component
 public class ArticleFixtures implements CommandLineRunner {
     //injection de dependance avec @RequiredArgsConstructor
     private final ArticleRepository articleRepository;
