@@ -6,6 +6,7 @@ import com.ism.ismecom.data.repositories.ArticleRepository;
 import com.ism.ismecom.data.repositories.ClientRepository;
 import com.ism.ismecom.data.repositories.CommandeRepository;
 import com.ism.ismecom.data.repositories.LigneCommandeRepository;
+import com.ism.ismecom.exceptions.EntityNotFoundException;
 import com.ism.ismecom.services.CommandeService;
 import com.ism.ismecom.web.dto.request.PanierDto;
 import com.ism.ismecom.web.dto.response.ClientShowEntityResponseDto;
@@ -43,8 +44,9 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public void saveCommande(PanierDto panier) {
         //Ligne de commande, c'est une liste et panier.getArticlesPanier() et de type article dto → convertir Article donc on stream
-        Client client = clientRepository.findById(panier.getClient().getId()).orElse(null);
-        if(client!=null){
+        Client client = clientRepository.findById(panier.getClient().getId())
+                .orElseThrow(()->new EntityNotFoundException("Le client n'existe pas"));
+
             //je transforme la chaine adresse en Adresse
             Commande commande = new Commande(
                     new Date(),
@@ -61,7 +63,7 @@ public class CommandeServiceImpl implements CommandeService {
             List<LigneCommande> ligneCommande = panier.getArticlesPanier().stream().map(
                 articlePanierDto -> {
                     Article article = articleRepository.findById(articlePanierDto.getId()).orElseThrow(
-                            ()-> new RuntimeException("L'article n'existe pas ! ")
+                            ()-> new EntityNotFoundException("L'article n'existe pas ! ")
                     );
 
                     return new LigneCommande(
@@ -76,7 +78,7 @@ public class CommandeServiceImpl implements CommandeService {
 
                 ligneCommandeRepository.saveAllAndFlush(ligneCommande);
 
-        }
+
 
 
     }

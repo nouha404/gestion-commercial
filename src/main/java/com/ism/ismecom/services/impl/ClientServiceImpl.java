@@ -2,6 +2,7 @@ package com.ism.ismecom.services.impl;
 
 import com.ism.ismecom.data.entities.Client;
 import com.ism.ismecom.data.repositories.ClientRepository;
+import com.ism.ismecom.exceptions.EntityNotFoundException;
 import com.ism.ismecom.services.ClientService;
 import com.ism.ismecom.web.dto.request.CreateClientRequestDto;
 import lombok.AllArgsConstructor;
@@ -41,7 +42,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client getClById(Long id) {
-        return clientRepository.findById(id).orElse(null);
+        return clientRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Le client n'existe pas"));
     }
 
 
