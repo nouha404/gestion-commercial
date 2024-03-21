@@ -49,6 +49,8 @@ public class SecurityConfig {
             // le template de base
             .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
             ).authorizeHttpRequests( auth -> auth
+                    .requestMatchers("/admin/**").hasAuthority("Admin")
+                    .requestMatchers("/client/**").hasAuthority("Client")
                     .anyRequest()
                     .authenticated()
             )

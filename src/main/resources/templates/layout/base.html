@@ -2,6 +2,7 @@
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
 <head>
     <meta charset="UTF-8">
@@ -20,15 +21,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page"  th:href="@{liste-client}">Mes Clients</a>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Admin')">
+                        <a class="nav-link active text-white" aria-current="page"  th:href="@{/admin/liste-client}">Mes Clients</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" th:href="@{liste-all-cmde}">Mes Commandes</a>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('Admin')">
+                        <a class="nav-link text-white" th:href="@{/admin/liste-all-cmde}">Mes Commandes</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Link</a>
+                        <a class="nav-link text-white" sec:authorize="isAuthenticated()" th:href="@{/logout}">Deconnection</a>
                     </li>
 
 

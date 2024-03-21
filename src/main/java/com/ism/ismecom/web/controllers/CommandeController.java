@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface CommandeController {
-    @GetMapping("/liste-commande")
+    @GetMapping("/admin/liste-commande")
     String listeCommande(Model model,
                          @RequestParam(defaultValue = "0",name = "page") int page,
                          @RequestParam(defaultValue = "5",name = "size") int size,
@@ -19,20 +19,20 @@ public interface CommandeController {
 
     );
 
-    @GetMapping("/liste-all-cmde")
+    @GetMapping("/admin/liste-all-cmde")
     public String listerAllCommande(Model model,
                                     @RequestParam(defaultValue = "0",name = "page") int page,
                                     @RequestParam(defaultValue = "5",name = "size") int size
     );
 
-    @GetMapping("/show-commande-form")
+    @GetMapping("/admin/show-commande-form")
     String showFormCommande(
             Model model,
             @RequestParam(name="id") long id,
             @ModelAttribute("panier") PanierDto panier
     );
 
-    @GetMapping("/save-commande")
+    @GetMapping("/admin/save-commande")
     String saveCommande(
             Model model,
             @ModelAttribute("panier") PanierDto panier

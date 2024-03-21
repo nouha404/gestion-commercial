@@ -55,7 +55,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <a th:class="${currentPage == 0 ? 'page-link disabled' : 'page-link'}"
-                           th:href="@{liste-commande(page=${PreviousPage},id=${clientId})}">
+                           th:href="@{/admin/liste-commande(page=${PreviousPage},id=${clientId})}">
                             Previous
                         </a>
                     </li>
@@ -65,7 +65,7 @@
                         <a
                                 th:class="${statut.index==currentPage? 'page-link active' : 'page-link'}"
                                 th:text="${statut.index+1}"
-                                th:href="@{liste-commande(page=${statut.index}, id=${clientId})}"
+                                th:href="@{/admin/liste-commande(page=${statut.index}, id=${clientId})}"
 
                         >
 
@@ -76,7 +76,7 @@
 
                         <a
                                 th:class="${currentPage==nextPage? 'page-link desabled' : 'page-link' }"
-                                th:href="@{liste-commande(page=${nextPage},id=${clientId})}"
+                                th:href="@{/admin/liste-commande(page=${nextPage},id=${clientId})}"
                         >
                             Next
                         </a>

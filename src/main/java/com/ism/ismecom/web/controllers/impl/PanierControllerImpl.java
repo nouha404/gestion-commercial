@@ -56,7 +56,7 @@ public class PanierControllerImpl implements PanierController {
         }
 
         //model.addAttribute("panier", panier);
-        return "redirect:/show-commande-form?id=" + panier.getClient().getId();
+        return "redirect:/admin/show-commande-form?id=" + panier.getClient().getId();
 
     }
 }

@@ -21,7 +21,7 @@
         <div class="card-header">
             <h3>Liste des Clients</h3>
             <div class="my- float-end">
-                <a  class="btn btn-outline-info " th:href="@{/show-client-form}">Nouveau</a>
+                <a  class="btn btn-outline-info " th:href="@{/admin/show-client-form}">Nouveau</a>
 
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <input type="search" name="telephone"
                        id="telephone" aria-label="search" class="mb-2"
                         th:value="${telephone}"
-                       th:action="@{/liste-client}"
+                       th:action="@{/admin/liste-client}"
                 >
                 <button type="submit" class="btn btn-outline-success ">Search</button>
             </form>
@@ -54,8 +54,8 @@
                     <td th:text="${cl.numVilla}"></td>
 
                     <td>
-                        <a th:href="@{liste-commande(id=${cl.id})}" class="btn btn-outline-success" >Mes Commandes</a>
-                        <a  class="btn btn-outline-success " th:href="@{/show-commande-form(id=${cl.id})}">Nouveau commande</a>
+                        <a th:href="@{/admin/liste-commande(id=${cl.id})}" class="btn btn-outline-success" >Mes Commandes</a>
+                        <a  class="btn btn-outline-success " th:href="@{/admin/show-commande-form(id=${cl.id})}">Nouveau commande</a>
                     </td>
                 </tr>
 
@@ -66,7 +66,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <a th:class="${currentPage == 0 ? 'page-link disabled' : 'page-link'}"
-                           th:href="@{liste-client(page=${PreviousPage})}">
+                           th:href="@{/admin/liste-client(page=${PreviousPage})}">
                             Previous
                         </a>
                     </li>
@@ -76,7 +76,7 @@
                         <a
                            th:class="${statut.index==currentPage? 'page-link active' : 'page-link'}"
                            th:text="${statut.index+1}"
-                           th:href="@{liste-client(page=${statut.index}, telephone=${telephone})}"
+                           th:href="@{/admin/liste-client(page=${statut.index}, telephone=${telephone})}"
 
                             >
 
@@ -87,7 +87,7 @@
 
                         <a
                            th:class="${currentPage==nextPage? 'page-link desabled' : 'page-link' }"
-                            th:href="@{liste-client(page=${nextPage})}"
+                            th:href="@{/admin/liste-client(page=${nextPage})}"
                         >
                             Next
                         </a>

@@ -89,7 +89,7 @@ public class CommandeControllerImpl implements CommandeController {
         List<Article> articles = articleService.getArticlesFormCommande();
         Client clientById = clientService.getClById(id);
         if (clientById == null){
-            return "redirect:/liste-client";
+            return "redirect:/admin/liste-client";
         }
         // Transformer Client en ClientShowEntityResponseDto
         ClientShowEntityResponseDto clientDto = ClientShowEntityResponseDto.toDto(clientById);
@@ -112,9 +112,9 @@ public class CommandeControllerImpl implements CommandeController {
         //renitialiser le panier
         model.addAttribute("panier",panier());
 
-        return "redirect:/liste-commande?id="+panier.getClient().getId();
-        //
-    }
+        panier.getArticlesPanier().clear();
 
+        return "redirect:/admin/liste-commande?id="+id;
+    }
 
 }
